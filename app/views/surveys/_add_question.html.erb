@@ -1,0 +1,29 @@
+<button type="button" class="btn btn-primary btn-xs add">Add</button> <button type="button" class="btn btn-default btn-xs remove">Remove</button> <span class="msg text-danger"></span>
+<hr>
+
+<form>
+<div class="container dynamic-rows"></div>
+</form>
+
+<script type="text/template" id="form_rows_tpl">
+  <div class="row">
+    <div class="col-lg-4">
+      <p>
+        <label for="FirstName_{{count}}">{{count}}. First Name</label><br>
+        <input type="text" name="FirstName" id="FirstName_{{count}}">
+      </p>
+    </div>
+    <div class="col-lg-4">
+      <p>
+        <label for="LastName_{{count}}">Last Name</label><br>
+        <input type="text" name="LastName" id="LastName_{{count}}">
+      </p>
+    </div>
+    <div class="col-lg-4">
+      <p>
+        <label for="EmailAddress_{{count}}">Email Address</label><br>
+        <input type="text" name="EmailAddress" id="EmailAddress_{{count}}">
+      </p>
+    </div>
+</div>
+</script>

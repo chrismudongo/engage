@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Qtype:</strong>
+  <%= @question.qtype %>
+</p>
+
+<p>
+  <strong>Tittle:</strong>
+  <%= @question.tittle %>
+</p>
+
+<p>
+  <strong>Qline:</strong>
+  <%= @question.qline %>
+</p>
+
+<p>
+  <strong>Options:</strong>
+  <%= @question.options %>
+</p>
+
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Back', questions_path %>

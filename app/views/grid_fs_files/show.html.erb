@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Filename:</strong>
+  <%= @grid_fs_file.filename %>
+</p>
+
+<p>
+  <strong>User group:</strong>
+  <%= @grid_fs_file.user_group %>
+</p>
+
+<p>
+  <strong>Contenttype:</strong>
+  <%= @grid_fs_file.contentType %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @grid_fs_file.author %>
+</p>
+
+<p>
+  <strong>Topic:</strong>
+  <%= @grid_fs_file.topic %>
+</p>
+
+<p>
+  <strong>Uploaddate:</strong>
+  <%= @grid_fs_file.uploadDate %>
+</p>
+
+<p>
+  <strong>Length:</strong>
+  <%= @grid_fs_file.length/1000*0.001%>
+</p>
+
+<p>
+  <strong>Contents:</strong>
+  <% if @grid_fs_file.contentType == "video" %>
+    <video width="420" height="345"  controls>
+      <source src= <%= contents_path("#{@grid_fs_file.id}")%>
+    </video>
+    <%elsif @grid_fs_file.contentType == "audio"%>
+       <audio controls>
+          <source src= <%= contents_path("#{@grid_fs_file.id}")%>/>
+       </audio>
+    <% else%>
+      <img height="500px" width="650px" src= <%= contents_path("#{@grid_fs_file.id}")%>/>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_grid_fs_file_path(@grid_fs_file) %> |
+<%= link_to 'Back', grid_fs_files_path %>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  qtype: 
+  tittle: 
+  qline: 
+  options: 
+
+two:
+  qtype: 
+  tittle: 
+  qline: 
+  options: 

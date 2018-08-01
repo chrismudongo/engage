@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<h1> News Media Content</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Contents</th>
+      <th>User group</th>
+      <th>Filename</th>
+      <th>Contenttype</th>
+      <th>Author</th>
+      <th>Topic</th>
+      <th>Uploaddate</th>
+      <th>Length</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @grid_fs_files.each do |grid_fs_file| %>
+      <tr>
+        <td>
+          <% if grid_fs_file.contentType == "video" %>
+            <video height="100px" width="130px" src= <%= contents_path("#{grid_fs_file.id}")%>/>
+
+           <%elsif  grid_fs_file.contentType == "audio" %>
+            <audio height="100px" width="130px" src= <%= contents_path("#{grid_fs_file.id}")%>/>
+
+           <% else %>
+            <img height="100px" width="130px" src= <%= contents_path("#{grid_fs_file.id}")%>/>
+          <% end %>
+
+          </td>
+        <td><%= grid_fs_file.filename %></td>
+        <td><%= grid_fs_file.user_group %></td>
+        <td><%= grid_fs_file.contentType %></td>
+        <td><%= grid_fs_file.author %></td>
+        <td><%= grid_fs_file.topic %></td>
+        <td><%= grid_fs_file.uploadDate %></td>
+        <td><%= grid_fs_file.length %></td>
+        <td><%= link_to 'Show', grid_fs_file %></td>
+        <td><%= link_to 'Edit', edit_grid_fs_file_path(grid_fs_file) %></td>
+        <td><%= link_to 'Delete', grid_fs_file, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Grid fs file', new_grid_fs_file_path %>
