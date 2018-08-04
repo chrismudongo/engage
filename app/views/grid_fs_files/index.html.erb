@@ -1,8 +1,9 @@
+<%= stylesheet_link_tag    'surveys', media: 'all', 'data-turbolinks-track': 'reload' %>
 <p id="notice"><%= notice %></p>
 
 <h1> News Media Content</h1>
-
-<table>
+<div class="table_view">
+<table class="pure-table">
   <thead>
     <tr>
       <th>Contents</th>
@@ -42,11 +43,13 @@
         <td><%= link_to 'Show', grid_fs_file %></td>
         <td><%= link_to 'Edit', edit_grid_fs_file_path(grid_fs_file) %></td>
         <td><%= link_to 'Delete', grid_fs_file, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Create survey', new_survey_path(grid_fs_file.id) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+</div>
 
 <br>
 
-<%= link_to 'New Grid fs file', new_grid_fs_file_path %>
+<%= link_to 'New Media item', new_grid_fs_file_path %>

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :authors
+  resources :articles
   resources :questions
   resources :surveys
   root to: 'grid_fs_files#index'

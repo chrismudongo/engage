@@ -1,15 +1,39 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Engage</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<%= csrf_meta_tags %>
 
-  <body>
+<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag   'application', 'data-turbolinks-track': 'reload' %>
+
+<header class="header">
+
+    	<div class="brand-box">
+    		<span class="brand"></span>
+    	</div>
+
+    	<div class="text-box">
+    		<h1 class="heading-primary">
+    			<span class="heading-primary-main"><h2>Engage</h2></span>
+    			<span class="heading-primary-sub">Better data collection</span>
+    		</h1>
+    		<a href="/grid_fs_files/" class="btn btn-white btn-animated"><b>View Media</b></a>
+        <a href="/surveys/" class="btn btn-white btn-animated"><b>Survey</b></a>
+        <a href="/#/" class="btn btn-white btn-animated"><b>Participants</b></a>
+        <a href="/#/" class="btn btn-white btn-animated"><b>Results</b></a>
+    	</div>
+
+</header>
+
+  <body class ="body">
+
+    
+
+
+
+
     <%= yield %>
+
+
+
   </body>
 </html>

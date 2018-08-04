@@ -10,15 +10,18 @@ class SurveysController < ApplicationController
   # GET /surveys/1
   # GET /surveys/1.json
   def show
+    @survey = Survey.find(params[:id])
   end
 
   # GET /surveys/new
   def new
     @survey = Survey.new
+    4.times{@survey.questions.build}
   end
 
   # GET /surveys/1/edit
   def edit
+    @survey = Survey.find(params[:id])
   end
 
   # POST /surveys
@@ -41,7 +44,7 @@ class SurveysController < ApplicationController
   # PATCH/PUT /surveys/1.json
   def update
     respond_to do |format|
-      if @survey.update(survey_params)
+      if @survey.update_attributes(survey_params)
         format.html { redirect_to @survey, notice: 'Survey was successfully updated.' }
         format.json { render :show, status: :ok, location: @survey }
       else
@@ -55,6 +58,7 @@ class SurveysController < ApplicationController
   # DELETE /surveys/1.json
   def destroy
     @survey.destroy
+    @survey.questions.destroy
     respond_to do |format|
       format.html { redirect_to surveys_url, notice: 'Survey was successfully destroyed.' }
       format.json { head :no_content }
