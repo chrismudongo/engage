@@ -1,39 +1,22 @@
-<%= form_for(@survey) do |f| %>
-  <% if survey.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(survey.errors.count, "error") %> prohibited this survey from being saved:</h2>
+<%= form_for @survey do |f| %>
 
-      <ul>
-      <% survey.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <div id='questions'>
+  <%= f.nested_fields_for :questions do |builder| %>
+   <div id=question_field>
+    <%= render "question_fields", :f => builder %>
+  </div>
+
   <% end %>
+    <div class='links'>
+<%=f.add_nested_fields_link :questions, "Add question"%>
+    </div>
 
-  <div class="field-input">
-    <%= f.label :group_id %><br>
-    <%= f.text_field :group_id %>
-  </div>
 
-  <table class='table'>
-   <thead>
-     <tr>
-       <th></th>
-       <th>question type</th>
-       <th>tittle</th>
-       <th>write question</th>
-     </tr>
-   </thead>
-   <tbody class='fields'>
-     <%= f.fields_for :questions do |builder| %>
-       <%= render 'question', f: builder %>
-     <% end %>
-   </tbody>
- </table>
 
-  <div class="actions">
-    <%= f.button :submit %>
-    <%= link_to_add_row('Add Question', f, :questions, class: 'btn btn-primary') %>
-  </div>
+  <p><%= f.submit "Submit" %></p>
+
 <% end %>

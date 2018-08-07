@@ -1,11 +1,11 @@
 class Survey
   include Mongoid::Document
-  include Mongoid::Attributes::Dynamic
 
-  field :group_id, type: String
 
+  field :name, type: String
+  has_many :questions
   embeds_many :questions
-  accepts_nested_attributes_for :questions, allow_destroy: true
+  accepts_nested_attributes_for :questions, :reject_if => lambda { |a| a[:content].blank? }, :allow_destroy => true
 
 
 end

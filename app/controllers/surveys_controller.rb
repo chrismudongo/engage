@@ -16,12 +16,15 @@ class SurveysController < ApplicationController
   # GET /surveys/new
   def new
     @survey = Survey.new
-    4.times{@survey.questions.build}
+    question = @survey.questions.build
+    question.answers.build
+
   end
 
   # GET /surveys/1/edit
   def edit
     @survey = Survey.find(params[:id])
+    
   end
 
   # POST /surveys
@@ -43,6 +46,7 @@ class SurveysController < ApplicationController
   # PATCH/PUT /surveys/1
   # PATCH/PUT /surveys/1.json
   def update
+    set_survey
     respond_to do |format|
       if @survey.update_attributes(survey_params)
         format.html { redirect_to @survey, notice: 'Survey was successfully updated.' }
@@ -57,8 +61,8 @@ class SurveysController < ApplicationController
   # DELETE /surveys/1
   # DELETE /surveys/1.json
   def destroy
+    @survey = Survey.find(params[:id])
     @survey.destroy
-    @survey.questions.destroy
     respond_to do |format|
       format.html { redirect_to surveys_url, notice: 'Survey was successfully destroyed.' }
       format.json { head :no_content }
