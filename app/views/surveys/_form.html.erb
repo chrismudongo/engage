@@ -1,22 +1,18 @@
 <%= form_for @survey do |f| %>
 
-  <p>
+  <div class=field>
     <%= f.label :name %><br />
     <%= f.text_field :name %>
-  </p>
-  <div id='questions'>
-  <%= f.nested_fields_for :questions do |builder| %>
-   <div id=question_field>
+  <div>
+
+
+  <%= f.fields_for :questions do |builder| %>
     <%= render "question_fields", :f => builder %>
-  </div>
-
   <% end %>
-    <div class='links'>
-<%=f.add_nested_fields_link :questions, "Add question"%>
-    </div>
 
+  <%= link_to_add_fields "Add question", f, :questions %>
 
-
+  <div class="actions">
   <p><%= f.submit "Submit" %></p>
-
+  <div>
 <% end %>
