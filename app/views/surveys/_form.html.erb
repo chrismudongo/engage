@@ -1,8 +1,12 @@
+<div class="survey_form">
 <%= form_for @survey do |f| %>
 
   <div class=field>
-    <%= f.label :name %><br />
+    <%= f.label :name %>
     <%= f.text_field :name %>
+
+    <%= f.label :description, "Description" %>
+    <%= f.text_area :description %>
   <div>
 
 
@@ -16,3 +20,4 @@
   <p><%= f.submit "Submit" %></p>
   <div>
 <% end %>
+</div>

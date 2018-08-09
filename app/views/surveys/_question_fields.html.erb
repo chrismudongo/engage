@@ -1,4 +1,10 @@
 <fieldset>
+  <th>
+  <%= f.label :type, "Question Type" %></th>
+
+    <%= f.radio_button(:type, "TEXT") %>TEXT<br />
+    <%= f.radio_button(:type, "MCQ") %>MCQ<br />
+
   <%= f.label :content, "Question" %><br />
   <%= f.text_area :content %><br />
   <%= f.check_box :_destroy %>
