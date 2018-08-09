@@ -5,6 +5,29 @@
 
 }
 
-input {
+input{
     width: 40%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+
+
+}
+
+textarea{
+    width: 40%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+    resize: none;
+}
+
+.actions {
+    width: 20%;
+    padding: 50px 300px;
+    border: none;
+    border-radius: 7px;
 }

@@ -3,85 +3,76 @@ class AndroidController < ApplicationController
   #2 = email already in use
   #3 = no item downloaded from server
   #4 = error uploading to server 
+  skip_before_action :verify_authenticity_token
+  require 'mongo'
 
-	skip_before_action :verify_authenticity_token
-
-	# POST method to verify user details on login
+  # POST method to verify user details on login
   def login
-
     # send paramaters of body
-    email = params[:email]
-    password = params[:password]
+    email = params[ :email]
+    password = params[ :password]
 
     # find student of username and password
-    @user = User.find(:email => email , :password => password)
-    if @user != nil
+    @user = User.where(email:email, password:password)
+    if @user.nil? || @user == []
        #email and password match
-       render plain: "Login Success:group"+@user.find(:user_group)
+       render plain: "Error:1"
     else
-      render plain: "Error:1"
+       render plain: "Login Success:"+@user[0]["user_group"]
+       #render json: @user
     end
   end
 
   #POST method to add new user 
-  def new_user 
-
-    email = params[:email]
-    password = params[:password]
-    user_group = params[:user_group]
+  def new_user
+    email = params[ :email]
+    password = params[ :password]
+    user_group = params[ :user_group]
 
     #check email is unique 
-    if User.find(:email => email).count() == 0
-      @user = User.new
-      #insert new user into DB
-      @user.insert_one({:email => email, :password => password, :user_group => user_group})
-  	  render plain: "SignUp Success:email"+email
+    if User.where(email:email).blank?
+      User.create( email: email, password: password, user_group: user_group )
+      render plain: "SignUp Success:"+user_group
     else
       render plain: "Error:2"
     end
-
   end
 
    #POST method to download all news article for user group 
-  def get_content  
-
-  	group = params[:group]
-
-    @newsItems = NewsItems.find(:user_group => group) #returns multiple documents, maybe add all into an array  
-
-  	render plain: "Success:Content="+group
-
-  end
-
-   #POST method to download survey linked to newsItemID 
-  def get_survey 
-
-    surveyID = params[:surveyID]
-    newsID = params [:newsID]
-
-    @Survey = Surveys.find(:surveyID => surveyID , :newsID => newsID) 
-    if @Survey != nil
-      #return JSON document, will only be text
-  	   render plain: @survey
+  def get_content
+    user_group = params[ :user_group]
+    @content = Content.where(user_group:user_group) #add code to check for dates 
+    if @content.nil? || @content == []
+      render plain: "Error:3"
     else
-        rend plain: "Error:3"
+      render json: @content
     end
   end
 
-   #POST method to upload user survey to DB, will only be TEXT 
-  def post_survey 
-
-    #long JSON string already containing email, user_group, surveyID, newsID and responses?  
-    survey = params[:survey]
-
-    @response = SurveyRespones.new
-    result = @response.insert_one(survey)
-    if result.n == 1
-      render plain: "Upload Success"
+   #POST method to download survey linked to newsItemID 
+  def get_survey
+    surveyID = params[ :surveyID]
+    newsID = params[ :newsID]
+    @survey = Survey.where(surveyID:surveyID, newsID:newsID) #get matching survey
+    if @survey.nil? || @content == []
+      render plain: "Error:3"
     else
-      render plain: "Error:4"
+      render json: @survey
+    end
+
   end
 
-  #POST method to get main content stored seperately 
-
+   #POST method to upload user survey to DB, will only be TEXT 
+  def post_survey
+    #long JSON string already containing email, user_group, surveyID, newsID and responses?  
+    body = JSON.parse(request.body.read) 
+    email = body ["email"]
+    surveyID = body["surveyID"]
+    user_group = body["user_group"]
+    responses = body["responses"]
+    SurveyResponse.create(email: email, surveyID:surveyID, user_group:user_group, responses: responses)    
+    #survey = params[ :surveyResponse]
+    #Survey_Response.create(survey)
+    render plain: "Upload Success"
+  end
 end
