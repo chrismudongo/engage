@@ -2,16 +2,16 @@ class AndroidController < ApplicationController
   #1 = incorrect login details
   #2 = email already in use
   #3 = no item downloaded from server
-  #4 = error uploading to server 
+  #4 = error uploading to server
   skip_before_action :verify_authenticity_token
   require 'mongo'
+  require 'json'
 
   # POST method to verify user details on login
   def login
     # send paramaters of body
     email = params[ :email]
     password = params[ :password]
-
     # find student of username and password
     @user = User.where(email:email, password:password)
     if @user.nil? || @user == []
@@ -23,13 +23,12 @@ class AndroidController < ApplicationController
     end
   end
 
-  #POST method to add new user 
+  #POST method to add new user
   def new_user
     email = params[ :email]
     password = params[ :password]
     user_group = params[ :user_group]
-
-    #check email is unique 
+    #check email is unique
     if User.where(email:email).blank?
       User.create( email: email, password: password, user_group: user_group )
       render plain: "SignUp Success:"+user_group
@@ -38,41 +37,48 @@ class AndroidController < ApplicationController
     end
   end
 
-   #POST method to download all news article for user group 
   def get_content
     user_group = params[ :user_group]
-    @content = Content.where(user_group:user_group) #add code to check for dates 
-    if @content.nil? || @content == []
-      render plain: "Error:3"
-    else
-      render json: @content
+    @content = GridFsFile.all
+    temp = []
+
+    @content.each do |x|
+      if x.nil?
+
+      else
+        if x.user_group ==user_group
+          tt =
+          temp.push({path: contents_path(x.id), filename: x.filename, type: x.contentType, user_group: x.user_group, id: x.id, topic:x.topic, uploa$
+        else
+
+        end
+      end
     end
+
+   render json: temp
   end
 
-   #POST method to download survey linked to newsItemID 
+   #POST method to download survey linked to newsItemID
   def get_survey
-    surveyID = params[ :surveyID]
-    newsID = params[ :newsID]
-    @survey = Survey.where(surveyID:surveyID, newsID:newsID) #get matching survey
+    survey_name = params[ :survey]
+    #newsID = params[ :newsID]
+    @survey = Survey.where(name:survey_name) #get matching survey
     if @survey.nil? || @content == []
       render plain: "Error:3"
     else
-      render json: @survey
+      render json: @survey[0]
     end
-
   end
 
-   #POST method to upload user survey to DB, will only be TEXT 
+   #POST method to upload user survey to DB, will only be TEXT
   def post_survey
-    #long JSON string already containing email, user_group, surveyID, newsID and responses?  
-    body = JSON.parse(request.body.read) 
+    body = JSON.parse(request.body.read)
     email = body ["email"]
     surveyID = body["surveyID"]
     user_group = body["user_group"]
     responses = body["responses"]
-    SurveyResponse.create(email: email, surveyID:surveyID, user_group:user_group, responses: responses)    
-    #survey = params[ :surveyResponse]
-    #Survey_Response.create(survey)
+    #newsID = body["NewsItem"]
+    SurveyResponse.create(email: email, surveyID:surveyID, user_group:user_group, responses: responses)
     render plain: "Upload Success"
   end
 end

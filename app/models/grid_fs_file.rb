@@ -3,7 +3,7 @@ class GridFsFile
   include ActiveModel::Model
   attr_accessor :contentType, :filename, :author, :topic, :user_group, :status
   attr_writer :contents
-  attr_reader :id, :uploadDate, :chunkSize, :length, :md5
+  attr_reader :id, :uploadDate, :chunkSize, :length, :md5, :metadata, :user_group, :topic, :status
 
   belongs_to :news_item, class_name: 'news_item'
 
