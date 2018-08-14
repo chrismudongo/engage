@@ -1,7 +1,7 @@
 class GridFsFile
   include Mongoid::Document
   include ActiveModel::Model
-  attr_accessor :contentType, :filename, :author, :topic, :user_group
+  attr_accessor :contentType, :filename, :author, :topic, :user_group, :status
   attr_writer :contents
   attr_reader :id, :uploadDate, :chunkSize, :length, :md5
 
@@ -14,11 +14,13 @@ class GridFsFile
       @author=params[:metadata].nil? ? nil : params[:metadata][:author]
       @topic=params[:metadata].nil? ? nil : params[:metadata][:topic]
       @user_group=params[:metadata].nil? ? nil : params[:metadata][:user_group]
+      @status=params[:metadata].nil? ? nil : params[:metadata][:status]
     else              #assume hash came from Rails
       @id=params[:id]
       @author=params[:author]
       @topic=params[:topic]
       @user_group=params[:user_group]
+      @status=params[:status]
     end
     @chunkSize=params[:chunkSize]
     @uploadDate=params[:uploadDate]
@@ -81,11 +83,12 @@ class GridFsFile
     description = {}
     description[:filename]=@filename          if !@filename.nil?
     description[:content_type]=@contentType   if !@contentType.nil?
-    if @author || @topic || @user_group
+    if @author || @topic || @user_group || @status
       description[:metadata] = {}
       description[:metadata][:author]=@author  if !@author.nil?
       description[:metadata][:topic]=@topic    if !@topic.nil?
       description[:metadata][:user_group]=@user_group    if !@user_group.nil?
+      description[:metadata][:status]=@status    if !@status.nil?
     end
 
     if @contents

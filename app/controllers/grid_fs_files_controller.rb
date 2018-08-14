@@ -74,6 +74,6 @@ class GridFsFilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def grid_fs_file_params
-      params.require(:grid_fs_file).permit(:filename, :contentType, :user_group, :author, :topic, :uploadDate, :length, :chunkSize, :md5, :contents)
+      params.require(:grid_fs_file).permit(:filename, :contentType, :user_group, :author, :topic, :uploadDate, :length, :chunkSize, :md5, :contents, :status)
     end
 end

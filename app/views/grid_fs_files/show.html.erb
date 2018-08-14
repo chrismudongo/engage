@@ -36,17 +36,26 @@
 </p>
 
 <p>
+  <strong>Status:</strong>
+  <%= @grid_fs_file.status %>
+</p>
+
+<p>
   <strong>Contents:</strong>
-  <% if @grid_fs_file.contentType == "video" %>
+  <% if @grid_fs_file.contentType == "Video" %>
     <video width="420" height="345"  controls>
       <source src= <%= contents_path("#{@grid_fs_file.id}")%>
     </video>
-    <%elsif @grid_fs_file.contentType == "audio"%>
+    <%elsif @grid_fs_file.contentType == "Audio"%>
        <audio controls>
           <source src= <%= contents_path("#{@grid_fs_file.id}")%>/>
        </audio>
+
+    <%elsif @grid_fs_file.contentType == "Text" %>
+          <div><object data= contents_path("#{@grid_fs_file.id}")></object></div>
+          
     <% else%>
-      <img height="500px" width="650px" src= <%= contents_path("#{@grid_fs_file.id}")%>/>
+      <img height="345px" width="420px" src= <%= contents_path("#{@grid_fs_file.id}")%>/>
   <% end %>
 </p>
 

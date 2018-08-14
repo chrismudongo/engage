@@ -7,4 +7,15 @@ module ApplicationHelper
       end
       link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
     end
+
+    def status_tag(str, options={})
+      options[:true_text] ||=''
+      options[:false_text] ||=''
+
+      if str == "OPEN"
+        content_tag(:span, options[:true_text], :class => 'status true')
+      else
+        content_tag(:span, options[:false_text], :class => 'status false')
+      end
+    end
 end

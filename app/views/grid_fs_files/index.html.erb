@@ -1,20 +1,16 @@
-<%= stylesheet_link_tag    'surveys', media: 'all', 'data-turbolinks-track': 'reload' %>
+
 <p id="notice"><%= notice %></p>
 
 <h1> News Media Content</h1>
 <div class="table_view">
-<table class="pure-table">
+<table style="width:100%; border-spacing:0;">
   <thead>
     <tr>
       <th>Contents</th>
-      <th>User group</th>
       <th>Filename</th>
-      <th>Contenttype</th>
-      <th>Author</th>
-      <th>Topic</th>
-      <th>Uploaddate</th>
-      <th>Length</th>
-      <th colspan="3"></th>
+      <th>User group</th>
+      <th>Content type</th>
+      <th>Status</th>
     </tr>
   </thead>
 
@@ -22,28 +18,30 @@
     <% @grid_fs_files.each do |grid_fs_file| %>
       <tr>
         <td>
-          <% if grid_fs_file.contentType == "video" %>
-            <video height="100px" width="130px" src= <%= contents_path("#{grid_fs_file.id}")%>/>
+          <% if grid_fs_file.contentType == "Video" %>
+            <video height="130px" width="130px" src= <%= contents_path("#{grid_fs_file.id}")%>/>
 
-           <%elsif  grid_fs_file.contentType == "audio" %>
-            <audio height="100px" width="130px" src= <%= contents_path("#{grid_fs_file.id}")%>/>
+           <%elsif  grid_fs_file.contentType == "Audio" %>
+            <audio height="130px" width="130px" src= <%= contents_path("#{grid_fs_file.id}")%>/>
 
            <% else %>
-            <img height="100px" width="130px" src= <%= contents_path("#{grid_fs_file.id}")%>/>
+            <img height="130px" width="130px" src= <%= contents_path("#{grid_fs_file.id}")%>/>
           <% end %>
 
           </td>
-        <td><%= grid_fs_file.filename %></td>
+        <td><%= link_to grid_fs_file.filename, grid_fs_file %></td>
         <td><%= grid_fs_file.user_group %></td>
         <td><%= grid_fs_file.contentType %></td>
-        <td><%= grid_fs_file.author %></td>
-        <td><%= grid_fs_file.topic %></td>
-        <td><%= grid_fs_file.uploadDate %></td>
-        <td><%= grid_fs_file.length %></td>
-        <td><%= link_to 'Show', grid_fs_file %></td>
-        <td><%= link_to 'Edit', edit_grid_fs_file_path(grid_fs_file) %></td>
-        <td><%= link_to 'Delete', grid_fs_file, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= link_to 'Create survey', new_survey_path(grid_fs_file.id) %></td>
+        <td><%= status_tag(grid_fs_file.status) %></td>
+        <td>
+        <p>
+        <div class="links_to_functions">
+            <%= link_to 'Edit', edit_grid_fs_file_path(grid_fs_file) %></br>
+            <%= link_to 'Delete', grid_fs_file, method: :delete, data: { confirm: 'Are you sure?' } %></br>
+            <%= link_to 'Create survey', new_survey_path(grid_fs_file.id) %>
+        </div>
+      </p>
+       </td>
       </tr>
     <% end %>
   </tbody>

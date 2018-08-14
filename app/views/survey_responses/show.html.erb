@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @survey_response.email %>
+</p>
+
+<p>
+  <strong>User group:</strong>
+  <%= @survey_response.user_group %>
+</p>
+
+<p>
+  <strong>Surveyid:</strong>
+  <%= @survey_response.surveyID %>
+</p>
+
+<p>
+  <strong>Responses:</strong></br>
+  <ol>
+  <% for response in @survey_response.responses %>
+    <li><%=h response %></li>
+  <% end %>
+  </ol>
+</p>
+
+<%= link_to 'Back', survey_responses_path %>

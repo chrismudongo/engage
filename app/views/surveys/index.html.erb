@@ -1,17 +1,20 @@
 <% title "Surveys" %>
 
-<table>
+<table style="width:100%; border-spacing:0;">
   <tr>
     <th>Name</th>
+    <th colspan="3" </th>
   </tr>
+  <tbody>
   <% for survey in @surveys %>
-    <tr>
+
       <td><%=h survey.name %></td>
       <td><%= link_to "Show", survey %></td>
       <td><%= link_to "Edit", edit_survey_path(survey) %></td>
       <td><%= link_to "Destroy", survey, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
+</tbody>
 </table>
 
 <p><%= link_to "New Survey", new_survey_path %></p>
