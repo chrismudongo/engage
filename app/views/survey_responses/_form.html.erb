@@ -1,13 +1,13 @@
 
-<%= simple_form_for(@survey_response) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+<%= form_for(@survey_response) do |f| %>
 
   <div class="form-inputs">
-    <%= f.input :email %>
-    <%= f.input :user_group %>
-    <%= f.input :surveyID %>
-    <%= f.input :responses %>
+
+    <p><span>Email</span><%= f.text_field :email %></p>
+    <p><span>User group</span><%= f.text_field :user_group %></p>
+    <p><span>Responses</span><%= f.text_field :responses %></p>
+    <p><span>survey id</span><%= f.text_field :surveyID %></p>
+    <p><span>Attach media</span><%= f.select(:newsID, GridFsFile.all.map{|p| [p.filename, p.id]}) %></p>
   </div>
 
   <div class="form-actions">

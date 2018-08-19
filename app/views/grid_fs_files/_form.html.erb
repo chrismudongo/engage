@@ -1,7 +1,14 @@
+<% if Survey.empty? %>
+  <p style="padding-top:50px; font-size:20px;"><b>No Survey Exists. Please create a survey before uploading news media</b>
+    <%= link_to "Create Survey", new_survey_path %>
+</p>
+
+<% else %>
+
 <%= form_for(@grid_fs_file) do |f| %>
   <% if @grid_fs_file.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@grid_fs_file.errors.count, "error") %> prohibited this grid_fs_file from being saved:</h2>
+      <h2><%= pluralize(@grid_fs_file.errors.count, "error") %> prohibited this news item from being saved:</h2>
 
       <ul>
       <% @grid_fs_file.errors.full_messages.each do |message| %>
@@ -12,36 +19,17 @@
   <% end %>
 <div class="form_settings">
 
-  <div class="field">
     <p><span>Filename</span><%= f.text_field :filename %></p>
-  </div>
-
-  <div class="field">
     <p><span>User group</span><%= f.text_field :user_group %></p>
-  </div>
-
-  <div class="field">
     <p><span>Content type</span><%= f.select(:contentType, ['Video','Audio','Text','Image']) %></p>
-  </div>
-
-  <div class="field">
     <p><span>Author</span><%= f.text_field :author %></p>
-  </div>
-
-  <div class="field">
     <p><span>Topic</span><%= f.text_field :topic %></p>
-  </div>
-
-  <div class="field">
     <p><span>Status</span><%= f.select(:status, ['OPEN','CLOSED']) %></p>
-  </div>
-
-  <div class="field">
+    <p><span>Attach survey</span><%= f.select(:survey_id, Survey.all.map{|p| [p.name, p._id]}) %></p>
     <p><span>Content</span><%= f.file_field :contents %></p>
-  </div>
 
-</div>
-  <div class="submit">
-    <p style="padding-top: 15px"><span>&nbsp</span><%= f.submit "UPLOAD"%><p>
-  </div>
+
+      <p style="padding-top: 15px;" ><span>&nbsp</span><%= f.submit "UPLOAD", :class => 'submit'%><p>
+
+<% end %>
 <% end %>

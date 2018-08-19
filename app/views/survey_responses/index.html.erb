@@ -5,6 +5,7 @@
 <table style="width:100%; border-spacing:0;">
   <thead>
     <tr>
+      <th>News Media name</th>
       <th>Email</th>
       <th>User group</th>
       <th>Surveyid</th>
@@ -14,8 +15,9 @@
   </thead>
 
   <tbody>
-    <% @survey_responses.each do |survey_response| %>
+    <% @survey_responses.order_by([:created_at, :desc]).each do |survey_response| %>
       <tr>
+        <td><%= survey_response.newsID %></td>
         <td><%= survey_response.email %></td>
         <td><%= survey_response.user_group %></td>
         <td><%= survey_response.surveyID %></td>
@@ -25,3 +27,6 @@
     <% end %>
   </tbody>
 </table>
+
+
+<%= link_to 'New survey resonse', new_survey_response_path %>

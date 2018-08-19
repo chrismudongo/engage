@@ -16,12 +16,23 @@
 </p>
 
 <p>
-  <strong>Responses:</strong></br>
-  <ol>
-  <% for response in @survey_response.responses %>
-    <li><%=h response %></li>
-  <% end %>
-  </ol>
+  <strong>News media filename:</strong>
+  <%= @survey_response.newsID%>
+
 </p>
 
+<p>
+  <% if @survey_response.responses.empty? %>
+
+  <% else %>
+      <strong>Responses:</strong></br>
+      <ol>
+
+
+      <% for response in @survey_response.responses %>
+        <li><%=h response %></li>
+      <% end %>
+      </ol>
+    </p>
+<%end%>
 <%= link_to 'Back', survey_responses_path %>

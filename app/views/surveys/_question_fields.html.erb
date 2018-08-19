@@ -1,14 +1,20 @@
-<fieldset>
-  <%= f.label :type, "Question Type" %>
-  <%= f.radio_button(:type, "TEXT") %>TEXT
-  <%= f.radio_button(:type, "MCQ") %>MCQ
 
-  <%= f.label :content, "Question" %><br />
-  <%= f.text_area :content %><br />
-  <%= f.check_box :_destroy %>
-  <%= f.label :_destroy, "Remove Question" %>
+<fieldset>
+  <legend><b>QUESTION FORM:</b></legend>
+  <div class="question_containers">
+
+    <p>Question Type<br/><%= f.radio_button(:type, 'TEXT')%>TEXT<br/>
+      <%= f.radio_button(:type, "MCQ") %>MCQ<br/>
+    </p>
+
+    <p><span>Question</span><%= f.text_area :content %></p>
+
+    <p><span>Delete question </span><%= f.check_box :_destroy %></p>
+
+
   <%= f.fields_for :answers do |builder| %>
   <%= render 'answer_fields', f: builder %>
   <% end %>
   <%= link_to_add_fields "Add Options", f, :answers %>
+  </div>
 </fieldset>

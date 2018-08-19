@@ -61,7 +61,6 @@ class SurveyResponsesController < ApplicationController
     end
   end
 
-  private
     # Use callbacks to share common setup or constraints between actions.
     def set_survey_response
       @survey_response = SurveyResponse.find(params[:id])
@@ -69,6 +68,6 @@ class SurveyResponsesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def survey_response_params
-      params.require(:survey_response).permit(:email, :user_group, :surveyID, :responses)
+      params.require(:survey_response).permit(:email, :user_group, :surveyID, :responses, :newsID)
     end
 end

@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<h1>User list</h1>
+
+<table style="width:100%; border-spacing:0;">
+  <thead>
+    <tr>
+      <th>Email</th>
+     <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% SurveyResponse.distinct(:email).each do |survey_response| %>
+      <tr>
+        <td><%= survey_response %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%= link_to 'New survey resonse', new_survey_response_path %>

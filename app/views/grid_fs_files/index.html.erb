@@ -19,13 +19,21 @@
       <tr>
         <td>
           <% if grid_fs_file.contentType == "Video" %>
-            <video height="130px" width="130px" src= <%= contents_path("#{grid_fs_file.id}")%>/>
+
+            <%= image_tag "video_icon.png", size: "50x50" %>
 
            <%elsif  grid_fs_file.contentType == "Audio" %>
-            <audio height="130px" width="130px" src= <%= contents_path("#{grid_fs_file.id}")%>/>
+
+              <%= image_tag "music_icon.png", size: "50x50" %>
+
+           <%elsif  grid_fs_file.contentType == "Text" %>
+
+              <%= image_tag "text_icon.png", size: "50x50" %>
 
            <% else %>
-            <img height="130px" width="130px" src= <%= contents_path("#{grid_fs_file.id}")%>/>
+
+              <%= image_tag "image_icon.png", size: "50x50" %>
+
           <% end %>
 
           </td>
@@ -38,7 +46,6 @@
         <div class="links_to_functions">
             <%= link_to 'Edit', edit_grid_fs_file_path(grid_fs_file) %></br>
             <%= link_to 'Delete', grid_fs_file, method: :delete, data: { confirm: 'Are you sure?' } %></br>
-            <%= link_to 'Create survey', new_survey_path(grid_fs_file.id) %>
         </div>
       </p>
        </td>

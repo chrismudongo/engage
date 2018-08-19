@@ -14,6 +14,24 @@
  *= require surveys
  *= require_self
  */
+ fieldset {
+     display: block;
+     margin-left: 2px;
+     margin-right: 2px;
+     padding-top: 0.35em;
+     padding-bottom: 0.625em;
+     padding-left: 0.75em;
+     padding-right: 0.75em;
+     border: 0px;
+ }
+ .question_containers{
+   border: 2px solid #E5E5DB;
+   color: #47433F;
+   padding-bottom: 30px;
+   background: #263C56;
+   color: #FFF;
+   font: 100% arial;
+ }
 
  html
 { height: 100%;}

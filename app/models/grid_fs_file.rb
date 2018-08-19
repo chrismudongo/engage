@@ -1,11 +1,13 @@
 class GridFsFile
   include Mongoid::Document
   include ActiveModel::Model
-  attr_accessor :contentType, :filename, :author, :topic, :user_group, :status
+  attr_accessor :contentType, :filename, :author, :topic, :user_group, :status, :survey_id
   attr_writer :contents
-  attr_reader :id, :uploadDate, :chunkSize, :length, :md5, :metadata, :user_group, :topic, :status
+  attr_reader :id, :uploadDate, :chunkSize, :length, :md5, :metadata, :user_group, :topic, :status, :survey_id, :filename
 
   belongs_to :news_item, class_name: 'news_item'
+
+  validates_presence_of :filename, :author, :topic, :user_group, :status, :survey_id
 
   def initialize(params={})
     Rails.logger.debug {"instantiating GridFsFile #{params}"}
@@ -15,12 +17,14 @@ class GridFsFile
       @topic=params[:metadata].nil? ? nil : params[:metadata][:topic]
       @user_group=params[:metadata].nil? ? nil : params[:metadata][:user_group]
       @status=params[:metadata].nil? ? nil : params[:metadata][:status]
+      @survey_id=params[:metadata].nil? ? nil : params[:metadata][:survey_id]
     else              #assume hash came from Rails
       @id=params[:id]
       @author=params[:author]
       @topic=params[:topic]
       @user_group=params[:user_group]
       @status=params[:status]
+      @survey_id=params[:survey_id]
     end
     @chunkSize=params[:chunkSize]
     @uploadDate=params[:uploadDate]
@@ -67,7 +71,7 @@ class GridFsFile
   end
 
   def contents
-    Rails.logger.debug {"getting gridfs content #{@id}"}
+    Rails.logger.debug {"getting news media content #{@id}"}
     f=self.class.mongo_client.database.fs.find_one(id_criteria)
     if f
       buffer = ""
@@ -83,12 +87,13 @@ class GridFsFile
     description = {}
     description[:filename]=@filename          if !@filename.nil?
     description[:content_type]=@contentType   if !@contentType.nil?
-    if @author || @topic || @user_group || @status
+    if @author || @topic || @user_group || @status || @survey_id
       description[:metadata] = {}
       description[:metadata][:author]=@author  if !@author.nil?
       description[:metadata][:topic]=@topic    if !@topic.nil?
       description[:metadata][:user_group]=@user_group    if !@user_group.nil?
       description[:metadata][:status]=@status    if !@status.nil?
+      description[:metadata][:survey_id]=@survey_id    if !@survey_id.nil?
     end
 
     if @contents
