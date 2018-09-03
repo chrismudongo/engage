@@ -1,5 +1,4 @@
-
-<p id="notice"><%= notice %></p>
+<% if admin_signed_in? %>
 
 <h1> News Media Content</h1>
 <div class="table_view">
@@ -58,3 +57,16 @@
 <br>
 
 <p class="new_survey_link"><%= link_to 'Create Media item', new_grid_fs_file_path %></p>
+
+<% else %>
+<div class="loging" style="border:3px">
+  <h2 style="padding-left:300px">WELCOME TO ENGAGE</h2>
+    <div style="padding-left:370px">
+     <%= image_tag "adduser.png", size: "100x100" %>
+   </div>
+    <ul style="padding-left:300px">
+      <li><%= link_to 'Log in', new_admin_session_path %></li>
+      <li><%= link_to 'Sign up', new_admin_registration_path %></li>
+    </ul>
+  </div>
+<% end %>

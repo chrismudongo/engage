@@ -1,4 +1,6 @@
 class SurveysController < ApplicationController
+  before_action :authenticate_admin!
+  before_action :admin_signed_in?
 
   # GET /surveys
   # GET /surveys.json

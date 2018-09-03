@@ -52,8 +52,9 @@
        </audio>
 
     <%elsif @grid_fs_file.contentType == "Text" %>
-          <div><object data= contents_path("#{@grid_fs_file.id}")></object></div>
-          
+
+          <embed height="345px" width="420px"  src= <%= contents_path("#{@grid_fs_file.id}")%> />
+
     <% else%>
       <img height="345px" width="420px" src= <%= contents_path("#{@grid_fs_file.id}")%>/>
   <% end %>

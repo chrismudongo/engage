@@ -1,5 +1,7 @@
 class SurveyResponsesController < ApplicationController
   before_action :set_survey_response, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!
+  before_action :admin_signed_in?
 
   # GET /survey_responses
   # GET /survey_responses.json

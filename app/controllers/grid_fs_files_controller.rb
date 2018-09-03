@@ -1,5 +1,7 @@
 class GridFsFilesController < ApplicationController
   before_action :set_grid_fs_file, only: [:show, :edit, :update, :destroy, :contents]
+  before_action :authenticate_admin!, except: [:index]
+  before_action :admin_signed_in?, except: [:index]
 
   def contents
     send_data @grid_fs_file.contents,

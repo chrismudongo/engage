@@ -11,6 +11,8 @@ gem 'jquery-rails'
 
 gem "cocoon"
 
+gem 'devise','>= 3.5.3'
+
 gem "nested_form"
 
 gem "simple_form"

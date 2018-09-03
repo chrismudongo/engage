@@ -17,24 +17,47 @@
   <div id="main">
     <div id="header">
       <div id="logo">
+      <% if admin_signed_in? %>
+        <div class="dropdown" align="right" style="padding-top:20px; float:right">
+          <button class="dropbtn"><%= current_admin.email %></button>
+          <div class="dropdown-content">
+            <a <%= link_to 'Log out', destroy_admin_session_path, method: :delete %></a>
+            <a <%= link_to 'Profile', edit_admin_registration_path %></a>
+          </div>
+      </div>
+      <% end %>
         <div id="logo_text">
           <!-- class="logo_colour", allows you to change the colour of the text -->
-          <h1><a href="#">Eng<span class="logo_colour">age</span></a></h1>
+          <h1><a href="http://localhost:3000">Eng<span class="logo_colour">age</span></a></h1>
           <h2>Better data collection.</h2>
         </div>
       </div>
+
+      <% if admin_signed_in? %>
+          <div id="menubar">
+            <ul id="menu">
+
+              <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+              <li><a href="/grid_fs_files/">News Content</a></li>
+              <li><a href="/surveys/">Surveys</a></li>
+              <li><a href="/users/">Participants</a></li>
+              <li><a href="/survey_responses/">Survey Responses</a></li>
+              <li><a href="#">About</a></li>
+
+            </ul>
+          </div>
+
+      <% else %>
       <div id="menubar">
         <ul id="menu">
-          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
-          <li><a href="/grid_fs_files/">News Content</a></li>
-          <li><a href="/surveys/">Surveys</a></li>
-          <li><a href="/users/">Participants</a></li>
-          <li><a href="/survey_responses/">Survey Responses</a></li>
-          <li><a href="#">About Engage</a></li>
         </ul>
       </div>
+      <% end %>
     </div>
     <div id="site_content">
+
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
 
 
       <div id="content">
