@@ -18,5 +18,5 @@ Rails.application.routes.draw do
    post 'android/get_content'
    post 'android/get_survey'
    post 'android/post_survey'
-
+   post 'android/forgot_password'
 end

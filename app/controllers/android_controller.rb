@@ -81,4 +81,14 @@ class AndroidController < ApplicationController
     SurveyResponse.create(email: email, surveyID:surveyID, user_group:user_group, responses: responses)
     render plain: "Upload Success"
   end
+
+  def forgot_password
+    email = params [:email]
+    @user = User.where(email:email)
+    if @user.blank?
+      render plain: "Error:No User"
+    else
+      ApplicationMailer.forgot_email(@user).deliver
+    end
+  end
 end

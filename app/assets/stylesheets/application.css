@@ -64,7 +64,7 @@
    letter-spacing: 0.1em;
      font: normal 100% 'lucida sans unicode', arial, sans-serif;
      display: block;
-     float: left;
+     float: center;
      height: 37px;
      padding: 29px 26px 6px 26px;
      text-align: center;
@@ -78,8 +78,7 @@
 .new_survey_link:hover {
   color: white;
   font-weight: bolder;
-  text-decoration:none
-
+  text-decoration:none;
  }
 
  .question_containers{
@@ -140,7 +139,7 @@ a, a:hover
 {
   text-decoration:none;
   font-weight: bold;
-  color: white;
+  color: #35818d;
 
 }
 
