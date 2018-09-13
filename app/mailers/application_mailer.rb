@@ -4,7 +4,7 @@ class ApplicationMailer < ActionMailer::Base
 
   def forgot_email(user)
     @user = user
-    mail(to: @user.email, subject: 'Engage recover password')
+    mail(to: @user.email, subject: 'Engage Password Recovery')
   end
-  
+
 end

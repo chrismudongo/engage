@@ -83,12 +83,14 @@ class AndroidController < ApplicationController
   end
 
   def forgot_password
-    email = params [:email]
-    @user = User.where(email:email)
+    email = params[ :email]
+    @user = User.where(email: email)
     if @user.blank?
       render plain: "Error:No User"
     else
-      ApplicationMailer.forgot_email(@user).deliver
+      ApplicationMailer.forgot_email(@user[0]).deliver
+      render plain: "Email Success"
     end
   end
+
 end

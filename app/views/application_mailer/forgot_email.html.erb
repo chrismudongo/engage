@@ -4,9 +4,11 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hi <%= @user.name %></h1>
+    <h3>Hello <%= @user.email %></h3>
     <p>
-      Sample mail sent using smtp.
+      Your password for the ENGAGE system is: <h5><%= @user.password %></h5>
+      <br />All the best,
+      <br />The ENGAGE team
     </p>
   </body>
 </html>
