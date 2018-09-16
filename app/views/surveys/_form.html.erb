@@ -1,9 +1,19 @@
 <div class="form_settings">
+
+
 <%= form_for @survey do |f| %>
 
+  <% if @survey.errors.any? %>
+    <ul>
+      <% @survey.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
   <div class=field>
-    <p><span>Name</span><%= f.text_field :name %></p>
-    <p><span>Description</span><%= f.text_area :description%></p>
+    <p><span>Name</span><%= f.text_field :name, placeholder: "Enter survey name here"   %></p>
+    <p><span>Description</span><%= f.text_area :description, placeholder: "Description here"  %></p>
   <div>
 </div>
 

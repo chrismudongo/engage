@@ -7,5 +7,6 @@ class Survey
   embeds_many :questions
   accepts_nested_attributes_for :questions, :reject_if => lambda { |a| a[:content].blank? }, :allow_destroy => true
   validates_presence_of :name, :description
+  validates :name, uniqueness: true
 
 end

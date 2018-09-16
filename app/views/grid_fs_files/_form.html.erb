@@ -13,17 +13,17 @@
       <ul>
       <% @grid_fs_file.errors.full_messages.each do |message| %>
         <li><%= message %></li>
-      <% end %>
       </ul>
+      <% end %>
     </div>
   <% end %>
 <div class="form_settings">
 
-    <p><span>Filename</span><%= f.text_field :filename %></p>
-    <p><span>User group</span><%= f.text_field :user_group %></p>
+    <p><span>Filename</span><%= f.text_field :filename, placeholder: "Enter file name here"  %></p>
+    <p><span>User group</span><%= f.text_field :user_group, placeholder: "Enter user group here"  %></p>
     <p><span>Content type</span><%= f.select(:contentType, ['Video','Audio','Text','Image']) %></p>
-    <p><span>Author</span><%= f.text_field :author %></p>
-    <p><span>Topic</span><%= f.text_field :topic %></p>
+    <p><span>Author</span><%= f.text_field :author, placeholder: "Enter author name here" %></p>
+    <p><span>Topic</span><%= f.text_field :topic, placeholder: "Enter topic here" %></p>
     <p><span>Status</span><%= f.select(:status, ['OPEN','CLOSED']) %></p>
     <p><span>Attach survey</span><%= f.select(:survey_id, Survey.all.map{|p| [p.name, p._id]}) %></p>
     <p><span>Content</span><%= f.file_field :contents %></p>

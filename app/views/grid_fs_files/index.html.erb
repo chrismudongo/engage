@@ -1,6 +1,7 @@
 <% if admin_signed_in? %>
 
 <h1> News Media Content</h1>
+<div class="new_survey_link"><%= link_to 'Create Media item', new_grid_fs_file_path %></div>
 <div class="table_view">
 <table style="width:100%; border-spacing:0;">
   <thead>
@@ -55,8 +56,6 @@
 </div>
 
 <br>
-
-<div class="new_survey_link"><%= link_to 'Create Media item', new_grid_fs_file_path %></div>
 
 <% else %>
 <div class="loging" style="border:3px">

@@ -7,7 +7,7 @@
       <%= f.radio_button(:type, "MCQ") %>MCQ<br/>
     </p>
 
-    <p><span>Question</span><%= f.text_area :content %></p>
+    <p><span>Question</span><%= f.text_area :content, placeholder: "Enter question here"   %></p>
 
     <p><span>Delete question </span><%= f.check_box :_destroy %></p>
 

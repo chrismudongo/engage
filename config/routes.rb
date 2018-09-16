@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :grid_fs_files
   get '/grid_fs_files/contents/:id/', to: 'grid_fs_files#contents', as: 'contents'
   resources :android
-
+  get '/about/aboutpage'
   # android
    post 'android/login'
    post 'android/new_user'

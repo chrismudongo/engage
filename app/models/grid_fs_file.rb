@@ -9,6 +9,8 @@ class GridFsFile
 
   validates_presence_of :filename, :author, :topic, :user_group, :status, :survey_id
 
+  validates :filename, uniqueness: true
+
   def initialize(params={})
     Rails.logger.debug {"instantiating GridFsFile #{params}"}
     if params[:_id]  #hash came from GridFS
