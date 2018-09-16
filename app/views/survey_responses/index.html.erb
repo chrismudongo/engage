@@ -20,6 +20,7 @@
         <td><%= survey_response.email %></td>
         <td><%= survey_response.user_group %></td>
         <td><%= survey_response.surveyID %></td>
+        <td><%= link_to "Show", survey_response %></td>
         <td><%= link_to 'Delete', survey_response, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
